@@ -1,0 +1,63 @@
+
+
+<form [formGroup]="loginForm" >
+
+    <div class="welcome" style="justify-content: center;">
+        <h1>¡ Bienvenido !</h1>
+    </div>
+
+    <div fxLayout="column" fxLayout.md="column" fxLayout.sm="column" fxLayout.xs="column" style="margin: 30px;">
+    
+        <mat-form-field class="login-field-email" appearance="fill" >
+            <mat-label>Email Address</mat-label>
+            <input matInput
+                    type="email"
+                    formControlName="email">
+        </mat-form-field>
+
+        <mat-form-field class="login-field-password" appearance="fill" style="margin-bottom: -1.25em;">
+            <mat-label>Password</mat-label>
+            <input matInput type="password" formControlName="password">
+        </mat-form-field>
+
+        <div style="justify-content: right; display: flex; padding-right: 50px; margin-bottom: 25px;">
+            <a href="">Forgot password?</a>
+        </div>
+
+        <section class="example-section">
+            <mat-checkbox class="login-field-rememberme" formControlName="rememberme">Remember me?</mat-checkbox>
+        </section>
+
+        <div fxLayout="row" 
+            fxLayout.sm="column"
+            fxLayout.xs="column"
+            fxLayoutGap="20px"
+            style="padding: 30px;">    
+    
+            <button mat-raised-button fxFlex="100" style="background-color: #E6005F; color: white; height: 50px;">
+                Sign in
+            </button>
+
+            <button mat-raised-button fxFlex="100" style="background-color: #0F6EFC; color: white;">
+                Sign in with Google
+            </button>
+
+        </div>
+        
+        <div style="justify-content: center; display: flex;">
+            <h5>or</h5>
+        </div>
+
+        <div style="justify-content: center; display: flex;">
+            <a href="auth/signup">Sing Up</a>
+        </div>
+
+        
+        
+    </div>
+
+</form>
+
+
+
+

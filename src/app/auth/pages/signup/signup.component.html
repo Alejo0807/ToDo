@@ -1,0 +1,87 @@
+
+
+<form [formGroup]="signupForm" >
+
+    <div class="welcome" style="justify-content: center;">
+        <h1>¡ Regístrate !</h1>
+    </div>
+
+    <div fxLayout="column" fxLayoutGap="15px" fxLayout.md="column" fxLayout.sm="column" fxLayout.xs="column" style="margin: 30px;">
+    
+
+        <div fxLayout="row" 
+            fxLayout.sm="column"
+            fxLayout.xs="column"
+            fxLayoutGap="20px"
+            fxFlex="50"
+            style="padding-left: 0px 50px 0px 50px; justify-content: center;">    
+    
+            <mat-form-field appearance="fill" fxFlex="37">
+                <mat-label>Name</mat-label>
+                <input matInput
+                        type="text"
+                        formControlName="name">
+            </mat-form-field>
+    
+            <mat-form-field appearance="fill" fxFlex="37">
+                <mat-label>Lastname</mat-label>
+                <input matInput 
+                        type="text" 
+                        formControlName="lastname">
+            </mat-form-field>
+
+        </div>
+
+        <mat-form-field class="login-field-form" appearance="fill" >
+            <mat-label>Email Address</mat-label>
+            <input matInput 
+                    type="email" 
+                    formControlName="email">
+        </mat-form-field>        
+
+        <mat-form-field class="login-field-form" appearance="fill" >
+            <mat-label>Password</mat-label>
+            <input matInput type="password" formControlName="password">
+        </mat-form-field>
+
+        <mat-form-field class="login-field-form" appearance="fill" >
+            <mat-label>Confirm Password</mat-label>
+            <input matInput type="password" formControlName="confirmPassword">
+        </mat-form-field>
+
+
+        <div fxLayout="row" 
+            fxLayout.sm="column"
+            fxLayout.xs="column"
+            fxLayoutGap="20px"
+            style="padding: 30px;">    
+    
+            <button mat-raised-button 
+                    fxFlex="100" 
+                    style="background-color: #E6005F; color: white; height: 50px;"
+                    (click)="signup()">
+                Sign up
+            </button>
+
+            <button mat-raised-button fxFlex="100" style="background-color: #0F6EFC; color: white;">
+                Sign up with Google
+            </button>
+
+        </div>
+
+        <div style="justify-content: center; display: flex;">
+            <h5>or</h5>
+        </div>
+
+        <div style="justify-content: center; display: flex;">
+            <a href="auth/signup">Login</a>
+        </div>
+
+        
+    </div>
+
+</form>
+
+
+
+

@@ -1,1 +1,44 @@
 /* You can add global styles to this file, and also import other style files */
+* {
+    margin: 0px; 
+    padding: 0px; 
+    box-sizing: border-box;
+    font-family: Poppins-Bold;
+}
+
+body, html {
+    height: 100%;
+}
+
+.limiter {
+    width: 100%;
+    margin: 0 auto;
+}
+  
+.container-login100 {
+    width: 100%;  
+    min-height: 100vh;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.wrap-login100 {
+    width: 500px;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+}
+  
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
