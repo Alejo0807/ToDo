@@ -5,17 +5,20 @@ import { User } from '../interfaces/user.interface';
 @Injectable({
   providedIn: 'root'
 })
-export class SignupService {
+export class AuthService {
 
-  
+  url = 'http://localhost:8080/auth';
 
   constructor(private http: HttpClient) { }
 
   signup(user: User) {
-    
-    const url = 'http://localhost:8080/user/';
     const body = user;
-    return this.http.post(url, body);
+    return this.http.post(`${this.url}/new-user`, body);
+  }
+
+  auth(email: string, password: string) {
+    const body = {email, password};
+    return this.http.post(`${this.url}/login`,body);
   }
 
   // validateToken(): Observable<boolean> {

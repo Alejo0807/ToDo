@@ -34,7 +34,8 @@
             fxLayoutGap="20px"
             style="padding: 30px;">    
     
-            <button mat-raised-button fxFlex="100" style="background-color: #E6005F; color: white; height: 50px;">
+            <button mat-raised-button fxFlex="100" style="background-color: #E6005F; color: white; height: 50px;"
+                    (click)="login()">
                 Sign in
             </button>
 
@@ -49,7 +50,7 @@
         </div>
 
         <div style="justify-content: center; display: flex;">
-            <a href="auth/signup">Sing Up</a>
+            <a [routerLink]="['/auth/signup']">Sing Up</a>
         </div>
 
         

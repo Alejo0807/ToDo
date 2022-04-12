@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from '../../interfaces/user.interface';
-import { SignupService } from '../../services/signup.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-signup',
@@ -40,7 +40,8 @@ export class SignupComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
               private router: Router,
-              private signupService: SignupService) { }
+              private authService: AuthService) {
+  }
 
   ngOnInit() {
   }
@@ -52,7 +53,7 @@ export class SignupComponent implements OnInit {
     this.user.email    = email;
     this.user.password = password;
 
-    this.signupService.signup(this.user)
+    this.authService.signup(this.user)
     .subscribe(console.log);
     
   }
