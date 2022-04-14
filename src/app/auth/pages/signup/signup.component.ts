@@ -23,8 +23,8 @@ import { AuthService } from '../../services/auth.service';
 export class SignupComponent implements OnInit {
 
   signupForm: FormGroup = this.fb.group({
-    name:            [,[Validators.required]],
-    lastname:        [,[Validators.required]],
+    name:            [,[Validators.required, Validators.maxLength(100)]],
+    lastname:        [,[Validators.required, Validators.maxLength(100)]],
     email:           [,[Validators.required, Validators.email]],
     password:        [,[Validators.required]],
     confirmPassword: [,[Validators.required]]
@@ -54,7 +54,13 @@ export class SignupComponent implements OnInit {
     this.user.password = password;
 
     this.authService.signup(this.user)
-    .subscribe(console.log);
+      .subscribe(resp => {
+        if (resp === true) {
+          this.router.navigateByUrl('/login');
+        } else {
+          console.log('Error............')
+        }
+      });
     
   }
 

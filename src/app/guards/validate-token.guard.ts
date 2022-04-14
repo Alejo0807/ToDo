@@ -1,15 +1,34 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { Observable } from 'rxjs';
+import { ActivatedRouteSnapshot, CanActivate, CanLoad, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { Observable, tap } from 'rxjs';
+import { AuthService } from '../auth/services/auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ValidateTokenGuard implements CanActivate {
-  canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return true;
+export class ValidateTokenGuard implements CanActivate, CanLoad {
+  
+  constructor(private authService: AuthService,
+    private router: Router) {}
+
+  canActivate(): Observable<boolean> | boolean {
+    return this.authService.validateToken()
+          .pipe(
+            tap( valid => {
+              console.log(valid);
+              if (!valid) this.router.navigateByUrl('/auth')
+            })
+          )
+  }
+
+  canLoad(): Observable<boolean> | boolean {
+    return this.authService.validateToken()
+            .pipe(
+              tap( valid => {
+                console.log(valid);
+                if (!valid) this.router.navigateByUrl('/auth')
+              })
+            )
   }
   
 }

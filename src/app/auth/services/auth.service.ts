@@ -1,47 +1,74 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from '../interfaces/user.interface';
+import { AuthResponse } from '../interfaces/auth.interface';
+import { catchError, map, of, tap, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  url = 'http://localhost:8080/auth';
+  private url = 'http://localhost:8080/auth';
+  private _user!: User;
+
+  get user() {
+    return {...this._user};
+  }
 
   constructor(private http: HttpClient) { }
 
   signup(user: User) {
+    const url = `${this.url}/new-user`;
     const body = user;
-    return this.http.post(`${this.url}/new-user`, body);
+
+    return this.http.post<AuthResponse>(url, body)
+    .pipe(
+      map( valid => valid.ok ),
+      catchError( err => of(err.error.msg)) 
+    );
   }
 
-  auth(email: string, password: string) {
+  login(email: string, password: string) {
+    const url = `${this.url}/login`;
     const body = {email, password};
-    return this.http.post(`${this.url}/login`,body);
+    return this.http.post<AuthResponse>(url, body)
+    .pipe(
+      tap( resp => {
+        console.log(resp);
+        if (resp.ok) {
+          localStorage.setItem('token', resp.token!);
+        }
+      }),
+      map( valid => valid.ok),
+      catchError( err => of(err.error.msg))
+    );
   }
 
-  // validateToken(): Observable<boolean> {
-  //   const url = `${this.baseUrl}/api/auth/renew`;
-  //   const headers = new HttpHeaders()
-  //     .set('x-token', localStorage.getItem('token') || '')
+  validateToken(): Observable<boolean> {
+    const url = `${this.url}/renew`;
+    const headers = new HttpHeaders()
+      .set('x-token', localStorage.getItem('token') || '')
 
-  //   return this.http.get<AuthResponse>(url, {headers})
-  //     .pipe(
-  //       tap( resp => {
-  //         if (resp.ok) {
-  //           localStorage.setItem('token', resp.token!);
-  //           this._user = {
-  //             name: resp.name!,
-  //             email: resp.email!,
-  //             uid: resp.uid!
-  //           }
-  //         }
-  //         return resp.ok;
-  //       }),
-  //       map( resp => resp.ok ),
-  //       catchError( err => of(false))
-  //     )
-  // }
+    return this.http.get<AuthResponse>(url, {headers})
+      .pipe(
+        tap( resp => {
+          console.log(resp);
+          if (resp.ok) {
+            localStorage.setItem('token', resp.token!);
+            this._user = {
+              email : resp.email!
+            }
+          }
+          return resp.ok;
+        }),
+        map( resp => resp.ok ),
+        catchError( err => of(false))
+      )
+  }
+
+  logout() {
+    localStorage.removeItem('token')
+  }
 
 }
