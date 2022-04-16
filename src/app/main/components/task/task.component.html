@@ -1,0 +1,28 @@
+<mat-card class="card">
+    
+    <div class="title">
+        <h1>test</h1>
+        <h3>testsetset</h3>
+    </div>
+
+    <div class="due-date">
+        <h1>Due Date</h1>
+    </div>
+
+    <div class="dificulty">
+        <h1>Dificulty:</h1>
+        <div class="boxes">
+            <div class="box" *ngFor="let item of items">.</div>
+        </div>
+    </div>
+
+    
+    <div style="display: flex; flex-direction: row;">
+        <button class="button-status-card" mat-raised-button color="warn">Warn</button>
+        <div class="update-task">
+            <mat-icon mat-ripple>edit</mat-icon>
+            <mat-icon mat-ripple>delete</mat-icon>
+        </div>
+    </div>
+
+</mat-card>

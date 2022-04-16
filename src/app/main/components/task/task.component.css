@@ -1,0 +1,61 @@
+
+mat-card {
+    background-color: #FFFFFFFF;
+    margin: 0px 70px 40px 50px;
+    border-radius: 15px;
+}
+
+mat-card-title {
+    margin-top: 10px;
+}
+
+.card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+h1 {
+    font: 400 24px/32px Roboto, "Helvetica Neue", sans-serif;
+    margin: 0 0 0px;
+}
+
+.card button {
+    margin-right: 10px;
+    padding: 5px 40px 5px 40px;
+}
+
+
+.button-status-card{
+    background-color: #12EC28;
+}
+
+.update-task {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-content: space-between
+}
+.update-task mat-icon {
+    cursor: pointer;
+}
+
+.dificulty {
+    display: flex;
+    flex-direction: row;
+}
+
+.boxes {
+    margin-left: 10px;
+    display: flex;
+    flex-direction: row;
+    row-gap: 20px;
+}
+
+.box {
+    margin-right: 2px;
+    border: 1px solid black;
+    background-color: #12EC28;
+    text-emphasis-color: #12EC28;
+}

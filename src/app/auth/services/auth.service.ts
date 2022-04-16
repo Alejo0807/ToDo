@@ -53,7 +53,6 @@ export class AuthService {
     return this.http.get<AuthResponse>(url, {headers})
       .pipe(
         tap( resp => {
-          console.log(resp);
           if (resp.ok) {
             localStorage.setItem('token', resp.token!);
             this._user = {
