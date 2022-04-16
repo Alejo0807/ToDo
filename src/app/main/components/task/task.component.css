@@ -3,6 +3,7 @@ mat-card {
     background-color: #FFFFFFFF;
     margin: 0px 70px 40px 50px;
     border-radius: 15px;
+    min-width: 800px;
 }
 
 mat-card-title {

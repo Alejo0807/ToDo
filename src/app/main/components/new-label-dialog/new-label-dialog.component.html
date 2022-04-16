@@ -1,0 +1,32 @@
+<h1 mat-dialog-title><b>EDIT LABELS</b></h1>
+
+<div mat-dialog-content>
+    <form class="form-labels">
+        <mat-form-field class="label1" appearance="fill">
+            <mat-label>Label 1</mat-label>
+            <input matInput placeholder="Label 1">
+        </mat-form-field>
+    
+        <mat-form-field class="label2" appearance="fill">
+            <mat-label>Label 2</mat-label>
+            <input matInput placeholder="Label 2">
+        </mat-form-field>
+    
+        <mat-form-field class="label3" appearance="fill">
+            <mat-label>Label 3</mat-label>
+            <input matInput placeholder="Label 3">
+        </mat-form-field>
+            
+        <mat-form-field class="label4" appearance="fill">
+            <mat-label>Label 4</mat-label>
+            <input matInput placeholder="Label 4">
+        </mat-form-field>
+    </form>
+
+    <span><b>Note: </b>Names have a maximum of 15 characters</span>
+</div>
+
+<div mat-dialog-actions style="margin-bottom: 2px;">
+    <button mat-raised-button (click)="cancel()" style="margin-left: auto;">Cancel</button>
+    <button mat-raised-button color="accent" (click)="save()">Save</button>
+</div>

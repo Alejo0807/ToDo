@@ -1,0 +1,77 @@
+<h1 mat-dialog-title><b>NEW TASK</b></h1>
+
+<div mat-dialog-content>
+    <form class="form-labels">
+        <mat-form-field class="title" appearance="fill">
+            <mat-label>Title</mat-label>
+            <input matInput placeholder="Title">
+        </mat-form-field>
+    
+        <mat-form-field class="description" appearance="fill">
+            <mat-label>Description</mat-label>
+            <input matInput placeholder="Description">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="datepicker">
+            <mat-label>Choose a date</mat-label>
+            <input matInput [matDatepicker]="datepicker">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+            <mat-datepicker #datepicker>
+              <mat-datepicker-actions>
+                <button mat-button matDatepickerCancel>Cancel</button>
+                <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
+              </mat-datepicker-actions>
+            </mat-datepicker>
+        </mat-form-field>
+
+        <div class="dificulty">
+            <span><b>Dificulty</b></span>
+            <mat-slider 
+                thumbLabel
+                step="1"
+                min="1"
+                max="5"
+                aria-label="units">
+            </mat-slider>
+        </div>
+
+        <div class="container">
+            <span style="margin-bottom: 8px;"><b>Labels</b></span>
+            <div class="labels">
+                <div id="label1">test</div>
+                <section>
+                    <mat-checkbox></mat-checkbox>
+                </section>
+            </div>
+
+            <div class="labels">
+                <div id="label2">test</div>
+                <section>
+                    <mat-checkbox></mat-checkbox>
+                </section>
+            </div>
+            
+            <div class="labels">
+                <div id="label3">test</div>
+                <section>
+                    <mat-checkbox></mat-checkbox>
+                </section>
+            </div>
+            
+            <div class="labels">
+                <div id="label4">test</div>
+                <section>
+                    <mat-checkbox></mat-checkbox>
+                </section>
+            </div>
+        </div>
+
+    </form>
+
+</div>
+
+<div mat-dialog-actions style="margin-bottom: 2px;">
+    <button mat-raised-button (click)="cancel()" style="margin-left: auto;">Cancel</button>
+    <button mat-raised-button color="accent" (click)="save()">Save</button>
+</div>
