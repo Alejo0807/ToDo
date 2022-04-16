@@ -62,6 +62,9 @@ section {
     width: 50%;
 }
 
+::ng-deep.trend-dialog.mat-dialog-container {
+    overflow-y: hidden !important;
+}
 
 
 

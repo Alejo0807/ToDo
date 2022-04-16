@@ -3,13 +3,14 @@ import { Injectable } from '@angular/core';
 import { User } from '../interfaces/user.interface';
 import { AuthResponse } from '../interfaces/auth.interface';
 import { catchError, map, of, tap, Observable } from 'rxjs';
+import { environment } from '../../../environments/environment'
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private url = 'http://localhost:8080/auth';
+  private baseUrl: string = environment.baseUrl;
   private _user!: User;
 
   get user() {
@@ -19,7 +20,7 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   signup(user: User) {
-    const url = `${this.url}/new-user`;
+    const url = `${this.baseUrl}/auth/new-user`;
     const body = user;
 
     return this.http.post<AuthResponse>(url, body)
@@ -30,7 +31,7 @@ export class AuthService {
   }
 
   login(email: string, password: string) {
-    const url = `${this.url}/login`;
+    const url = `${this.baseUrl}/auth/login`;
     const body = {email, password};
     return this.http.post<AuthResponse>(url, body)
     .pipe(
@@ -46,7 +47,7 @@ export class AuthService {
   }
 
   validateToken(): Observable<boolean> {
-    const url = `${this.url}/renew`;
+    const url = `${this.baseUrl}/auth/renew`;
     const headers = new HttpHeaders()
       .set('x-token', localStorage.getItem('token') || '')
 

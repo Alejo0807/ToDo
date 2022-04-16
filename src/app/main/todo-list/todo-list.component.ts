@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { NewLabelDialogComponent } from '../components/new-label-dialog/new-label-dialog.component';
 import { NewTaskDialogComponent } from '../components/new-task-dialog/new-task-dialog.component';
+import { LabelsService } from '../services/labels.service';
+import { Label } from '../interfaces/interfaces';
 
 @Component({
   selector: 'app-todo-list',
@@ -12,9 +14,14 @@ export class TodoListComponent implements OnInit {
 
   items = [1,2,3,4,5,6,7,8]
 
-  constructor(private dialog: MatDialog) { }
+  labels: Label[] = [];
+
+  constructor(private dialog: MatDialog,
+              private label: LabelsService) { }
 
   ngOnInit(): void {
+    this.label.getLabels()
+      .subscribe(console.log);
   }
 
   openLabels() {

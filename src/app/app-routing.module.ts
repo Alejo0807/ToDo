@@ -10,8 +10,8 @@ const routes: Routes = [
   {
     path: 'main',
     loadChildren: () => import('./main/main.module').then(m => m.MainModule),
-    //canActivate: [ValidateTokenGuard],
-    //canLoad: [ValidateTokenGuard]
+    canActivate: [ValidateTokenGuard],
+    canLoad: [ValidateTokenGuard]
   },
   {
     path: '**',
