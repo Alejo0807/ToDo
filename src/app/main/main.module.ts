@@ -7,6 +7,7 @@ import { MaterialModule } from '../material/material.module';
 import { TaskComponent } from './components/task/task.component';
 import { NewLabelDialogComponent } from './components/new-label-dialog/new-label-dialog.component';
 import { NewTaskDialogComponent } from './components/new-task-dialog/new-task-dialog.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -19,7 +20,9 @@ import { NewTaskDialogComponent } from './components/new-task-dialog/new-task-di
   imports: [
     CommonModule,
     MainRoutingModule,
-    MaterialModule
+    MaterialModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class MainModule { }

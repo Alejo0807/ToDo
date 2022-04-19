@@ -30,7 +30,7 @@ export class SignupComponent implements OnInit {
     confirmPassword: [,[Validators.required]]
   })
 
-  user: User =
+  user =
   {
     name:     '',
     lastname: '',

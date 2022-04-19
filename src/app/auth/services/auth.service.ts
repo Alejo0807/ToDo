@@ -19,7 +19,9 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  signup(user: User) {
+
+  // Validaciones por si existe el usuario
+  signup(user: any) {
     const url = `${this.baseUrl}/auth/new-user`;
     const body = user;
 

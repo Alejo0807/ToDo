@@ -13,12 +13,13 @@ export class LabelsService {
 
   constructor(private http: HttpClient) { }
 
-  getLabels(): Observable<Label[]> {
-    return this.http.get<Label[]>(`${this.baseUrl}/labels`);
+  getLabelsByUserId(userId: number): Observable<Label[]> {
+    const params = { userId }
+    return this.http.get<Label[]>(`${this.baseUrl}/labels`, { params });
   }
   
   updateLabels(labels: Label[]): Observable<Label[]> {
-    const body = labels;
+    const body = [labels[0],labels[1],labels[2],labels[3]];
     return this.http.put<Label[]>(`${this.baseUrl}/labels`, body);
   }
 }

@@ -1,8 +1,13 @@
 import { User } from "src/app/auth/interfaces/user.interface"
 
+export interface LabelId {
+    labelId?:   number,
+    userId  ?:   number
+}
+
 export interface Label {
-    labelsId: number,
-    label?:     string
+    id    :      LabelId
+    labelName?:      string
 }
 
 export interface Section {

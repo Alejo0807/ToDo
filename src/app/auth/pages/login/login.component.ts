@@ -41,9 +41,9 @@ export class LoginComponent implements OnInit {
               private authService: AuthService,
               private router: Router) { }
     
-    
   ngOnInit(): void {
   }
+
   login() {
     const {email, password} = this.loginForm.value;
     

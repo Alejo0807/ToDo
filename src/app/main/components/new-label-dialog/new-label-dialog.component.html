@@ -1,25 +1,45 @@
 <h1 mat-dialog-title><b>EDIT LABELS</b></h1>
 
 <div mat-dialog-content>
-    <form class="form-labels">
+    <form class="form-labels" [formGroup]="labelsForm">
         <mat-form-field class="label1" appearance="fill">
             <mat-label>Label 1</mat-label>
-            <input matInput placeholder="Label 1">
+            <input matInput 
+                    [placeholder]="labelsDialog[0].labelName!"
+                    formControlName="label1">
+            <mat-error *ngIf="labelsForm.invalid && (labelsForm.dirty || labelsForm.touched)">
+                Max <strong>15</strong> characters
+            </mat-error>
         </mat-form-field>
     
         <mat-form-field class="label2" appearance="fill">
             <mat-label>Label 2</mat-label>
-            <input matInput placeholder="Label 2">
+            <input matInput 
+                    [placeholder]="labelsDialog[1].labelName!"
+                    formControlName="label2">
+            <mat-error *ngIf="labelsForm.invalid && (labelsForm.dirty || labelsForm.touched)">
+                Max <strong>15</strong> characters
+            </mat-error>
         </mat-form-field>
     
         <mat-form-field class="label3" appearance="fill">
             <mat-label>Label 3</mat-label>
-            <input matInput placeholder="Label 3">
+            <input matInput 
+                    [placeholder]="labelsDialog[2].labelName!"
+                    formControlName="label3">
+            <mat-error *ngIf="labelsForm.invalid && (labelsForm.dirty || labelsForm.touched)">
+                Max <strong>15</strong> characters
+            </mat-error>
         </mat-form-field>
             
         <mat-form-field class="label4" appearance="fill">
             <mat-label>Label 4</mat-label>
-            <input matInput placeholder="Label 4">
+            <input matInput 
+                    [placeholder]="labelsDialog[3].labelName!"
+                    formControlName="label4">
+            <mat-error *ngIf="labelsForm.invalid && (labelsForm.dirty || labelsForm.touched)">
+                Max <strong>15</strong> characters
+            </mat-error>
         </mat-form-field>
     </form>
 
@@ -27,6 +47,6 @@
 </div>
 
 <div mat-dialog-actions style="margin-bottom: 2px;">
-    <button mat-raised-button (click)="cancel()" style="margin-left: auto;">Cancel</button>
-    <button mat-raised-button color="accent" (click)="save()">Save</button>
+    <button mat-raised-button (click)="onCancel()" style="margin-left: auto;">Cancel</button>
+    <button *ngIf="labelsForm.valid" mat-raised-button color="accent" (click)="save()">Save</button>
 </div>

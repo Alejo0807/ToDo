@@ -4,7 +4,7 @@
             <span>Username or Email</span>
         </div>
     
-        <div (click)="openLabels()" class="item right labels">
+        <div (click)="openLabelsDialog()" class="item right labels">
             <span>Labels</span>
         </div>
     
@@ -33,10 +33,10 @@
                     <button id="to-do" mat-raised-button color="warn">TO DO</button>
                 </div>
                 <div class="status">
-                    <button id="label1" mat-raised-button color="warn">Label 1</button>
-                    <button id="label2" mat-raised-button color="warn">Label 2</button>
-                    <button id="label3" mat-raised-button color="warn">Label 3</button>
-                    <button id="label4" mat-raised-button color="warn">Label 4</button>
+                    <button id="label1" mat-raised-button color="warn">{{labels[0].labelName}}</button>
+                    <button id="label2" mat-raised-button color="warn">{{labels[1].labelName}}</button>
+                    <button id="label3" mat-raised-button color="warn">{{labels[2].labelName}}</button>
+                    <button id="label4" mat-raised-button color="warn">{{labels[3].labelName}}</button>
                 </div>
             </div>
 
