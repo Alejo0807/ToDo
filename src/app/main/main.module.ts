@@ -8,6 +8,7 @@ import { TaskComponent } from './components/task/task.component';
 import { NewLabelDialogComponent } from './components/new-label-dialog/new-label-dialog.component';
 import { NewTaskDialogComponent } from './components/new-task-dialog/new-task-dialog.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NewSectionDialogComponent } from './components/new-section-dialog/new-section-dialog.component';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     TodoListComponent,
     TaskComponent,
     NewLabelDialogComponent,
-    NewTaskDialogComponent
+    NewTaskDialogComponent,
+    NewSectionDialogComponent
   ],
   imports: [
     CommonModule,

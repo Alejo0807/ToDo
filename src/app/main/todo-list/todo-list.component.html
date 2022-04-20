@@ -22,12 +22,14 @@
         <div class="labels-add-task">
             
             <div class="section" >
-                <h1>{{sections[currentSection].name!}}</h1>
+                <h1>{{sections[currentSectionIndex].name!}}</h1>
                 <mat-icon matRipple [matMenuTriggerFor]="menuSections">keyboard_arrow_down</mat-icon>
                 <mat-menu #menuSections="matMenu">
                     <button mat-menu-item 
                             *ngFor="let section of sections"
                             (click)="changeSection(section.sectionId!)">{{section.name}}</button>
+                    <button mat-menu-item 
+                            (click)="addSection()">+ Add New Section</button>
                 </mat-menu>
             </div>
 

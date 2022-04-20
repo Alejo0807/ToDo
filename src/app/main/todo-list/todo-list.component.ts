@@ -10,6 +10,7 @@ import { UserService } from '../services/user.service';
 import { User } from 'src/app/auth/interfaces/user.interface';
 import { TaskSerivce } from '../services/task.service';
 import { SectionService } from '../services/section.service';
+import { NewSectionDialogComponent } from '../components/new-section-dialog/new-section-dialog.component';
 
 interface localLabel {
   labelId  : number,
@@ -30,7 +31,8 @@ export class TodoListComponent implements OnInit {
   tasks: Task[] = [];
 
   sections: Section[] = [{name: 'Loading'}];
-  currentSection: number = 0;
+  currentSection: Section = {name: ''};
+  currentSectionIndex: number = 0;
 
   constructor(private dialog: MatDialog,
               private userService: UserService,
@@ -103,16 +105,37 @@ export class TodoListComponent implements OnInit {
 
     newTaskDialog.afterClosed().subscribe(result => {
       if (result) {
-
+        
       }
     });
     
   }
 
+  // newSectionDialog() {
+  //   const newSectionDialog = this.dialog.open(NewSectionDialogComponent, {
+  //     width: '350px'
+  //   });
+  // }
+
+  addSection() {
+    // this.newSectionDialog();
+    const newSectionDialog = this.dialog.open(NewSectionDialogComponent, {
+      width: '350px'
+    });
+    newSectionDialog.afterClosed().subscribe(result => {
+      if (result) {
+        this.sectionService.saveSection(this.user.userId!, result)
+          .subscribe(res => {
+            this.sections.push(res);
+          })
+      }
+    });
+  }
+
   changeSection(sectionId: number) {
     this.tasks = [];
-    this.currentSection = this.sections.indexOf(
-                      this.sections.find(sec => sec.sectionId! === sectionId)!);
+    this.currentSection = this.sections.find(sec => sec.sectionId! === sectionId)!;
+    this.currentSectionIndex = this.sections.indexOf(this.currentSection);
     this.getTasksBySectionId(sectionId);
   }
 
