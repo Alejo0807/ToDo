@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 
 import { MainRoutingModule } from './main-routing.module';
 import { TodoListComponent } from './todo-list/todo-list.component';
@@ -25,6 +25,7 @@ import { NewSectionDialogComponent } from './components/new-section-dialog/new-s
     MaterialModule,
     FormsModule,
     ReactiveFormsModule
-  ]
+  ],
+  providers: [DatePipe]
 })
 export class MainModule { }

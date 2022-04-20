@@ -69,7 +69,8 @@ export class TodoListComponent implements OnInit {
     this.sectionService.getSectionsByUserId(this.user.userId!)
       .subscribe(res => {
         this.sections = res;
-        this.getTasksBySectionId(this.sections[0].sectionId!);
+        this.currentSection = this.sections[0];
+        this.getTasksBySectionId(this.currentSection.sectionId!);
       });
   }
 
@@ -103,9 +104,13 @@ export class TodoListComponent implements OnInit {
       data: this.labels
     });
 
-    newTaskDialog.afterClosed().subscribe(result => {
+    newTaskDialog.afterClosed().subscribe((result:Task) => {
       if (result) {
-        
+        console.log(result)
+        this.taskSerivce.saveTaskBySectionId(this.currentSection.sectionId!, result)
+          .subscribe(res => {
+            this.tasks.push(res);
+          })
       }
     });
     

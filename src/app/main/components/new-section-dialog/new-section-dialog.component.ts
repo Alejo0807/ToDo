@@ -33,7 +33,7 @@ export class NewSectionDialogComponent implements OnInit {
   }
 
   onCancel() {
-    this.newSectionDialog.close({});
+    this.newSectionDialog.close();
   }
 
   onSave() {

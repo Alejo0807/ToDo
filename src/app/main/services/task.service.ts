@@ -22,7 +22,7 @@ export class TaskSerivce {
     return this.http.get<Task>(`${this.baseUrl}/task/${taskId}`);
   }
 
-  saveTask(sectionId: number, task: Task): Observable<Task> {
+  saveTaskBySectionId(sectionId: number, task: Task): Observable<Task> {
     const body = task;
     return this.http.post<Task>(`${this.baseUrl}/task/save/${sectionId}`, body);
   }

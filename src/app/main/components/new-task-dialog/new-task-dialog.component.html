@@ -17,8 +17,7 @@
         <mat-form-field appearance="fill" class="datepicker">
             <mat-label>Choose a date</mat-label>
             <input  matInput formControlName="dueDate" 
-                    [matDatepicker]="datepicker" 
-                    value="{{ dueDate | date: 'DD-MM-YYYY'}}">
+                    [matDatepicker]="datepicker">
             <mat-hint>DD/MM/YYYY</mat-hint>
             <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
             <mat-datepicker #datepicker>
