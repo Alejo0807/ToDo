@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { NewLabelDialogComponent } from '../components/new-label-dialog/new-label-dialog.component';
 import { NewTaskDialogComponent } from '../components/new-task-dialog/new-task-dialog.component';
 import { LabelsService } from '../services/labels.service';
-import { Label, Task } from '../interfaces/interfaces';
+import { Label, Task, Section } from '../interfaces/interfaces';
 import { pipe, map, tap } from 'rxjs';
 import { AuthService } from '../../auth/services/auth.service';
 import { UserService } from '../services/user.service';
@@ -29,6 +29,9 @@ export class TodoListComponent implements OnInit {
 
   tasks: Task[] = [];
 
+  sections: Section[] = [{name: 'Loading'}];
+  currentSection: number = 0;
+
   constructor(private dialog: MatDialog,
               private userService: UserService,
               private authService: AuthService,
@@ -42,9 +45,9 @@ export class TodoListComponent implements OnInit {
         if(resp) {
           this.user = resp;
           this.getLabels();
+          this.getSections();
         }
       });
-    this.getTasks();
   }
     
   getLabels() {
@@ -60,8 +63,16 @@ export class TodoListComponent implements OnInit {
       })
   }
 
-  getTasks() {
-    this.taskSerivce.getTasksBySectionId(7)
+  getSections() {
+    this.sectionService.getSectionsByUserId(this.user.userId!)
+      .subscribe(res => {
+        this.sections = res;
+        this.getTasksBySectionId(this.sections[0].sectionId!);
+      });
+  }
+
+  getTasksBySectionId(sectionId: number) {
+    this.taskSerivce.getTasksBySectionId(sectionId)
       .subscribe( res => {
         this.tasks = res;
       })
@@ -84,7 +95,7 @@ export class TodoListComponent implements OnInit {
 
   }
 
-  newTask() {
+  newTaskDialog() {
     const newTaskDialog = this.dialog.open(NewTaskDialogComponent, {
       width: '350px',
       data: this.labels
@@ -96,6 +107,13 @@ export class TodoListComponent implements OnInit {
       }
     });
     
+  }
+
+  changeSection(sectionId: number) {
+    this.tasks = [];
+    this.currentSection = this.sections.indexOf(
+                      this.sections.find(sec => sec.sectionId! === sectionId)!);
+    this.getTasksBySectionId(sectionId);
   }
 
   logout() {

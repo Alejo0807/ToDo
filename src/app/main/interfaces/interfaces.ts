@@ -11,7 +11,7 @@ export interface Label {
 }
 
 export interface Section {
-    sectionId?: string,
+    sectionId?: number,
     name      : string
 }
 

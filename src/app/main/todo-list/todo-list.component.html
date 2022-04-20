@@ -22,8 +22,13 @@
         <div class="labels-add-task">
             
             <div class="section" >
-                <h1>SECTION</h1>
-                <mat-icon matRipple>keyboard_arrow_down</mat-icon>
+                <h1>{{sections[currentSection].name!}}</h1>
+                <mat-icon matRipple [matMenuTriggerFor]="menuSections">keyboard_arrow_down</mat-icon>
+                <mat-menu #menuSections="matMenu">
+                    <button mat-menu-item 
+                            *ngFor="let section of sections"
+                            (click)="changeSection(section.sectionId!)">{{section.name}}</button>
+                </mat-menu>
             </div>
 
             <div class="labels-status">
@@ -41,7 +46,7 @@
             </div>
 
             <div class="add-task">
-                <button mat-raised-button color="warn" (click)="newTask()">+</button>
+                <button mat-raised-button color="warn" (click)="newTaskDialog()">+</button>
             </div>
                 
         </div>

@@ -13,7 +13,7 @@ export class SectionService {
 
   constructor(private http: HttpClient) { }
 
-  getSections(userId: number): Observable<Section[]> {
+  getSectionsByUserId(userId: number): Observable<Section[]> {
     return this.http.get<Section[]>(`${this.baseUrl}/section/list/${userId}`);
   }
 
