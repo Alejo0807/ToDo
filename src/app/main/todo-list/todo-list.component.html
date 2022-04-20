@@ -46,8 +46,8 @@
                 
         </div>
     
-        <div *ngFor="let item of items">
-            <app-task></app-task>
+        <div *ngFor="let task of tasks">
+            <app-task [task]="task"></app-task>
         </div>
     
     

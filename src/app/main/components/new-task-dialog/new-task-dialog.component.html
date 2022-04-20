@@ -1,21 +1,25 @@
 <h1 mat-dialog-title><b>NEW TASK</b></h1>
 
 <div>
-    <form class="form-labels">
+    <form class="form-labels" [formGroup]="newTaskForm">
         <mat-form-field class="title" appearance="fill">
             <mat-label>Title</mat-label>
-            <input matInput placeholder="Title">
+            <input matInput placeholder="Title"
+                    formControlName="title">
         </mat-form-field>
     
         <mat-form-field class="description" appearance="fill">
             <mat-label>Description</mat-label>
-            <input matInput placeholder="Description">
+            <input matInput placeholder="Description"
+            formControlName="description">
         </mat-form-field>
 
         <mat-form-field appearance="fill" class="datepicker">
             <mat-label>Choose a date</mat-label>
-            <input matInput [matDatepicker]="datepicker">
-            <mat-hint>MM/DD/YYYY</mat-hint>
+            <input  matInput formControlName="dueDate" 
+                    [matDatepicker]="datepicker" 
+                    value="{{ dueDate | date: 'DD-MM-YYYY'}}">
+            <mat-hint>DD/MM/YYYY</mat-hint>
             <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
             <mat-datepicker #datepicker>
               <mat-datepicker-actions>
@@ -28,6 +32,7 @@
         <div class="dificulty">
             <span><b>Dificulty</b></span>
             <mat-slider 
+                formControlName="dificulty"
                 thumbLabel
                 step="1"
                 min="1"
@@ -39,30 +44,30 @@
         <div class="container">
             <span style="margin-bottom: 8px;"><b>Labels</b></span>
             <div class="labels">
-                <div id="label1">test</div>
+                <div id="label1">{{labelsDialog[0].labelName}}</div>
                 <section>
-                    <mat-checkbox></mat-checkbox>
+                    <mat-checkbox formControlName="label1"></mat-checkbox>
                 </section>
             </div>
 
             <div class="labels">
-                <div id="label2">test</div>
+                <div id="label2">{{labelsDialog[1].labelName}}</div>
                 <section>
-                    <mat-checkbox></mat-checkbox>
+                    <mat-checkbox formControlName="label2"></mat-checkbox>
                 </section>
             </div>
             
             <div class="labels">
-                <div id="label3">test</div>
+                <div id="label3">{{labelsDialog[2].labelName}}</div>
                 <section>
-                    <mat-checkbox></mat-checkbox>
+                    <mat-checkbox formControlName="label3"></mat-checkbox>
                 </section>
             </div>
             
             <div class="labels">
-                <div id="label4">test</div>
+                <div id="label4">{{labelsDialog[3].labelName}}</div>
                 <section>
-                    <mat-checkbox></mat-checkbox>
+                    <mat-checkbox formControlName="label4"></mat-checkbox>
                 </section>
             </div>
         </div>
@@ -72,6 +77,6 @@
 </div>
 
 <div mat-dialog-actions style="margin-bottom: 2px;">
-    <button mat-raised-button (click)="cancel()" style="margin-left: auto;">Cancel</button>
-    <button mat-raised-button color="accent" (click)="save()">Save</button>
+    <button mat-raised-button (click)="onCancel()" style="margin-left: auto;">Cancel</button>
+    <button mat-raised-button color="accent" (click)="onSave()" [disabled]="!newTaskForm.valid">Save</button>
 </div>

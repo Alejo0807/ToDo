@@ -16,7 +16,7 @@ export interface Section {
 }
 
 export interface Task {
-    taskId        : string,
+    taskId?        : number,
     title         : string,
     description?  : string,
     dueDate       : Date,

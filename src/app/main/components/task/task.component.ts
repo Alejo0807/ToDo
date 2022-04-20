@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Task } from '../../interfaces/interfaces';
 
 @Component({
   selector: 'app-task',
@@ -7,11 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TaskComponent implements OnInit {
 
-  items = [1,2,3,4,5,6,7,8]
+  dificulty: any;
+
+  @Input() task: Task | undefined;
 
   constructor() { }
 
   ngOnInit(): void {
+    this.dificulty = Array(this.task!.dificulty).fill('1');
   }
 
 }

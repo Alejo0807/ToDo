@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Label, Task } from '../../interfaces/interfaces';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-new-task-dialog',
@@ -8,17 +11,58 @@ import { MatDialogRef } from '@angular/material/dialog';
 })
 export class NewTaskDialogComponent implements OnInit {
 
-  constructor(private newTask: MatDialogRef<NewTaskDialogComponent>) { }
+  labelsDialog: Label[] = [];
+
+  dueDate: Date = new Date();
+
+  newTaskForm: FormGroup = this.fb.group({
+    title:       ['', [Validators.required]],
+    description: ['', []],
+    dueDate:     [formatDate(this.dueDate, 'dd-MM-yyyy', 'en'), [Validators.required]],
+    dificulty:   [1, [Validators.required]],
+    label1:      ['', []],
+    label2:      ['', []],
+    label3:      ['', []],
+    label4:      ['', []]
+  })
+
+  constructor(private newTaskDialog: MatDialogRef<NewTaskDialogComponent>,
+              @Inject(MAT_DIALOG_DATA) private labels: Label[],
+              private fb: FormBuilder) { }
 
   ngOnInit(): void {
+    this.labelsDialog = {...this.labels};
+
+    this.newTaskDialog.keydownEvents().subscribe(event => {
+      if (event.key === "Escape") {
+          this.onCancel();
+      }
+    });
+
+    this.newTaskDialog.backdropClick().subscribe(event => {
+        this.onCancel();
+    });
   }
 
-  cancel() {
-    this.newTask.close();
+  onCancel() {
+    this.newTaskDialog.close({});
   }
 
-  save() {
+  onSave() {
+    const {title, description, dueDate, dificulty, label1, label2, label3, label4} = this.newTaskForm.value;
+    const task: Task = {
+      title,
+      description,
+      dueDate,
+      dificulty,
+      state: 'To-Do',
+      labels: this.changeValue(label1)+''+this.changeValue(label2)+''+this.changeValue(label3)+''+this.changeValue(label4)
+    }
+    this.newTaskDialog.close(task);
+  }
 
+  changeValue(isChecked: boolean): string {
+    return isChecked? '1' : '0';
   }
 
 }

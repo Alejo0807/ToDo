@@ -3,8 +3,8 @@
     <!-- crear los labels  -->
 
     <div class="title">
-        <h1>test</h1>
-        <h3>testsetset</h3>
+        <h1>{{task!.title}}</h1>
+        <h3>{{task!.description}}</h3>
     </div>
 
     <div class="due-date">
@@ -14,7 +14,7 @@
     <div class="dificulty">
         <h1>Dificulty:</h1>
         <div class="boxes">
-            <div class="box" *ngFor="let item of items">.</div>
+            <div class="box" *ngFor="let item of dificulty">.</div>
         </div>
     </div>
 

@@ -3,11 +3,13 @@ import { MatDialog } from '@angular/material/dialog';
 import { NewLabelDialogComponent } from '../components/new-label-dialog/new-label-dialog.component';
 import { NewTaskDialogComponent } from '../components/new-task-dialog/new-task-dialog.component';
 import { LabelsService } from '../services/labels.service';
-import { Label } from '../interfaces/interfaces';
+import { Label, Task } from '../interfaces/interfaces';
 import { pipe, map, tap } from 'rxjs';
 import { AuthService } from '../../auth/services/auth.service';
 import { UserService } from '../services/user.service';
 import { User } from 'src/app/auth/interfaces/user.interface';
+import { TaskSerivce } from '../services/task.service';
+import { SectionService } from '../services/section.service';
 
 interface localLabel {
   labelId  : number,
@@ -21,16 +23,18 @@ interface localLabel {
 })
 export class TodoListComponent implements OnInit {
 
-  items = [1,2,3,4,5,6,7,8]
-
   user: User  = {email: ''};
 
   labels: Label[] = [{id: {}},{id: {}},{id: {}},{id: {}}];
 
+  tasks: Task[] = [];
+
   constructor(private dialog: MatDialog,
               private userService: UserService,
               private authService: AuthService,
-              private labelService: LabelsService) { }
+              private labelService: LabelsService,
+              private taskSerivce: TaskSerivce,
+              private sectionService: SectionService) { }
 
   ngOnInit(): void {
     this.userService.getUserByToken()
@@ -40,7 +44,8 @@ export class TodoListComponent implements OnInit {
           this.getLabels();
         }
       });
-    }
+    this.getTasks();
+  }
     
   getLabels() {
     this.labelService.getLabelsByUserId(this.user.userId!)
@@ -52,6 +57,13 @@ export class TodoListComponent implements OnInit {
             this.labels[index].labelName = label.labelName!;
           })
         }
+      })
+  }
+
+  getTasks() {
+    this.taskSerivce.getTasksBySectionId(7)
+      .subscribe( res => {
+        this.tasks = res;
       })
   }
 
@@ -73,12 +85,15 @@ export class TodoListComponent implements OnInit {
   }
 
   newTask() {
-    const newTask = this.dialog.open(NewTaskDialogComponent, {
-      width: '350px'
+    const newTaskDialog = this.dialog.open(NewTaskDialogComponent, {
+      width: '350px',
+      data: this.labels
     });
 
-    newTask.afterClosed().subscribe(result => {
-      console.log(result);
+    newTaskDialog.afterClosed().subscribe(result => {
+      if (result) {
+
+      }
     });
     
   }
