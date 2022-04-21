@@ -22,8 +22,8 @@
     <div style="display: flex; flex-direction: row;">
         <button class="button-status-card" mat-raised-button color="warn">Warn</button>
         <div class="update-task">
-            <mat-icon mat-ripple>edit</mat-icon>
-            <mat-icon mat-ripple>delete</mat-icon>
+            <mat-icon mat-ripple (click)="editTaskDialog()">edit</mat-icon>
+            <mat-icon mat-ripple (click)="deleteTaskDialog()">delete</mat-icon>
         </div>
     </div>
 

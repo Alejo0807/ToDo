@@ -48,13 +48,15 @@
             </div>
 
             <div class="add-task">
-                <button mat-raised-button color="warn" (click)="newTaskDialog()">+</button>
+                <button mat-raised-button color="warn" (click)="newTaskDialog(false)">+</button>
             </div>
                 
         </div>
     
         <div *ngFor="let task of tasks">
-            <app-task [task]="task"></app-task>
+            <app-task [task]="task" 
+                    (editTaskEvent)="editTask($event)"
+                    (deleteTaskEvent)="deleteTask($event)"></app-task>
         </div>
     
     

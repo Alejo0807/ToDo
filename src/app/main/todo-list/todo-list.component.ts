@@ -34,6 +34,8 @@ export class TodoListComponent implements OnInit {
   currentSection: Section = {name: ''};
   currentSectionIndex: number = 0;
 
+  taskToEdit: Task | undefined;
+
   constructor(private dialog: MatDialog,
               private userService: UserService,
               private authService: AuthService,
@@ -98,22 +100,36 @@ export class TodoListComponent implements OnInit {
 
   }
 
-  newTaskDialog() {
+  newTaskDialog(edit: boolean) {
+    this.taskToEdit = edit? this.taskToEdit : undefined;
     const newTaskDialog = this.dialog.open(NewTaskDialogComponent, {
       width: '350px',
-      data: this.labels
+      data: { labels : this.labels,
+              task   : this.taskToEdit }
     });
 
     newTaskDialog.afterClosed().subscribe((result:Task) => {
       if (result) {
-        console.log(result)
         this.taskSerivce.saveTaskBySectionId(this.currentSection.sectionId!, result)
           .subscribe(res => {
-            this.tasks.push(res);
+            if (!edit) {
+              this.tasks.push(res);
+            } else {
+              this.tasks[this.tasks.indexOf(this.taskToEdit!)] = res;
+            }
           })
       }
     });
     
+  }
+
+  editTask(task: Task) {
+    this.taskToEdit = task;
+    this.newTaskDialog(true);
+  }
+
+  deleteTask(toDelete: boolean) {
+
   }
 
   // newSectionDialog() {
