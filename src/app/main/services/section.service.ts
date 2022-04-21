@@ -26,9 +26,9 @@ export class SectionService {
     return this.http.post<Section>(`${this.baseUrl}/section/save/${userId}`, body);
   }
 
-  deleteSection(userId: number, sectionId: number): Observable<ResponseMessage> {
+  deleteSection(sectionId: number): Observable<ResponseMessage> {
     const params = { sectionId };
-    return this.http.post<ResponseMessage>(`${this.baseUrl}/section/delete/${userId}`, { params });
+    return this.http.post<ResponseMessage>(`${this.baseUrl}/section/delete/`, {}, { params });
   }
 
 }

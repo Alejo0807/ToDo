@@ -9,6 +9,7 @@ import { NewLabelDialogComponent } from './components/new-label-dialog/new-label
 import { NewTaskDialogComponent } from './components/new-task-dialog/new-task-dialog.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NewSectionDialogComponent } from './components/new-section-dialog/new-section-dialog.component';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { NewSectionDialogComponent } from './components/new-section-dialog/new-s
     TaskComponent,
     NewLabelDialogComponent,
     NewTaskDialogComponent,
-    NewSectionDialogComponent
+    NewSectionDialogComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     CommonModule,

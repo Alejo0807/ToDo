@@ -1,0 +1,10 @@
+<h1 mat-dialog-title><b>DELETE TASK</b></h1>
+
+<div mat-dialog-content>
+    <span>Are you sure to delete it?</span>
+</div>
+
+<div mat-dialog-actions style="margin-bottom: 2px;">
+    <button mat-raised-button (click)="onCancel()" style="margin-left: auto;">Cancel</button>
+    <button mat-raised-button color="accent" (click)="onDelete()">Delete</button>
+</div>

@@ -1,7 +1,7 @@
 <div class="test">
     <mat-toolbar class="container">
         <div class="item">
-            <span>Username or Email</span>
+            <span>{{user.email}}</span>
         </div>
     
         <div (click)="openLabelsDialog()" class="item right labels">
@@ -25,9 +25,11 @@
                 <h1>{{sections[currentSectionIndex].name!}}</h1>
                 <mat-icon matRipple [matMenuTriggerFor]="menuSections">keyboard_arrow_down</mat-icon>
                 <mat-menu #menuSections="matMenu">
-                    <button mat-menu-item 
-                            *ngFor="let section of sections"
-                            (click)="changeSection(section.sectionId!)">{{section.name}}</button>
+                    <div class="section-delete-button" *ngFor="let section of sections">
+                        <button mat-menu-item 
+                                (click)="changeSection(section.sectionId!)">{{section.name}}</button>
+                        <button mat-button (click)="deleteSection(section.sectionId!)"><mat-icon>delete</mat-icon></button>
+                    </div>
                     <button mat-menu-item 
                             (click)="addSection()">+ Add New Section</button>
                 </mat-menu>

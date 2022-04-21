@@ -11,6 +11,7 @@ import { User } from 'src/app/auth/interfaces/user.interface';
 import { TaskSerivce } from '../services/task.service';
 import { SectionService } from '../services/section.service';
 import { NewSectionDialogComponent } from '../components/new-section-dialog/new-section-dialog.component';
+import { ConfirmDialogComponent } from '../components/confirm-dialog/confirm-dialog.component';
 
 interface localLabel {
   labelId  : number,
@@ -128,18 +129,24 @@ export class TodoListComponent implements OnInit {
     this.newTaskDialog(true);
   }
 
-  deleteTask(toDelete: boolean) {
+  deleteTask(task: Task) {
+    const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
+      width: '350px'
+    });
 
+    confirmDialog.afterClosed().subscribe(result => {
+      if (result) {
+        this.taskSerivce.deleteTask(task.taskId!)
+          .subscribe( res => {
+            if (res.ok) {
+              this.tasks.splice(this.tasks.indexOf(task!),1);
+            }
+          })
+      }
+    })
   }
 
-  // newSectionDialog() {
-  //   const newSectionDialog = this.dialog.open(NewSectionDialogComponent, {
-  //     width: '350px'
-  //   });
-  // }
-
   addSection() {
-    // this.newSectionDialog();
     const newSectionDialog = this.dialog.open(NewSectionDialogComponent, {
       width: '350px'
     });
@@ -158,6 +165,27 @@ export class TodoListComponent implements OnInit {
     this.currentSection = this.sections.find(sec => sec.sectionId! === sectionId)!;
     this.currentSectionIndex = this.sections.indexOf(this.currentSection);
     this.getTasksBySectionId(sectionId);
+  }
+
+  deleteSection(sectionId: number) {
+    const sectionToDelete = this.sections.find(sec => sec.sectionId! === sectionId)!;
+    const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
+      width: '350px'
+    });
+
+    confirmDialog.afterClosed().subscribe(result => {
+      if (result) {
+        this.sectionService.deleteSection(sectionId)
+          .subscribe(res => {
+            if (res.ok) {
+              this.sections.splice(this.sections.indexOf(sectionToDelete),1);
+              this.currentSection = this.sections[0];
+              this.currentSectionIndex = 0;
+              this.getTasksBySectionId(this.currentSection.sectionId!);
+            }
+          })
+      }
+    })
   }
 
   logout() {

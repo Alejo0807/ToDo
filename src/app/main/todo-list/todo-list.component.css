@@ -131,6 +131,9 @@ mat-toolbar {
     background-color: #FFFFFFFF;
 }
 
-
+::ng-deep button.mat-menu-item {
+    width: auto !important;
+    display: inline;
+}
 
 

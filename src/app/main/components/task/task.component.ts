@@ -14,7 +14,7 @@ export class TaskComponent implements OnInit {
 
   @Input() task: Task | undefined;
   @Output() editTaskEvent = new EventEmitter<Task>();
-  @Output() deleteTaskEvent = new EventEmitter<boolean>();
+  @Output() deleteTaskEvent = new EventEmitter<Task>();
 
   constructor() { }
 
@@ -29,7 +29,7 @@ export class TaskComponent implements OnInit {
   }
 
   deleteTaskDialog() {
-    this.deleteTaskEvent.emit(true);
+    this.deleteTaskEvent.emit(this.task!);
   }
 
 

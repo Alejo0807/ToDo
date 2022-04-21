@@ -27,8 +27,8 @@ export class TaskSerivce {
     return this.http.post<Task>(`${this.baseUrl}/task/save/${sectionId}`, body);
   }
 
-  deleteTask(userId: number, taskId: number): Observable<ResponseMessage> {
+  deleteTask(taskId: number): Observable<ResponseMessage> {
     const params = { taskId };
-    return this.http.post<ResponseMessage>(`${this.baseUrl}/task/delete/${userId}`, { params });
+    return this.http.post<ResponseMessage>(`${this.baseUrl}/task/delete/`, {} ,{ params });
   }
 }
