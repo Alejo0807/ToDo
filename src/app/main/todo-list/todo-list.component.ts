@@ -12,6 +12,7 @@ import { TaskSerivce } from '../services/task.service';
 import { SectionService } from '../services/section.service';
 import { NewSectionDialogComponent } from '../components/new-section-dialog/new-section-dialog.component';
 import { ConfirmDialogComponent } from '../components/confirm-dialog/confirm-dialog.component';
+import { Router } from '@angular/router';
 
 interface localLabel {
   labelId  : number,
@@ -37,7 +38,8 @@ export class TodoListComponent implements OnInit {
 
   taskToEdit: Task | undefined;
 
-  constructor(private dialog: MatDialog,
+  constructor(private router: Router,
+              private dialog: MatDialog,
               private userService: UserService,
               private authService: AuthService,
               private labelService: LabelsService,
@@ -190,7 +192,7 @@ export class TodoListComponent implements OnInit {
 
   logout() {
     this.authService.logout();
-
+    this.router.navigateByUrl('login')
   }
 
 }
