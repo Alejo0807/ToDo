@@ -20,7 +20,9 @@
         
         
         <div style="display: flex; flex-direction: row;">
-            <button class="button-status-card" mat-raised-button color="warn">{{task!.state}}</button>
+            <button class="button-status-card" 
+                    (click)="onClickState()"
+                    mat-raised-button [ngStyle]="{ 'background-color': colorState }" >{{task!.state}}</button>
             <div class="update-task">
                 <mat-icon mat-ripple (click)="editTaskDialog()">edit</mat-icon>
                 <mat-icon mat-ripple (click)="deleteTaskDialog()">delete</mat-icon>

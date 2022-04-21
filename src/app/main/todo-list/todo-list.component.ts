@@ -148,6 +148,11 @@ export class TodoListComponent implements OnInit {
     })
   }
 
+  updateStateTask(task: Task) {
+    this.taskSerivce.saveTaskBySectionId(this.currentSection.sectionId!, task)
+          .subscribe()
+  }
+
   addSection() {
     const newSectionDialog = this.dialog.open(NewSectionDialogComponent, {
       width: '350px'
