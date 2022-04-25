@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from '../../interfaces/user.interface';
-import { SignupService } from '../../services/signup.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-signup',
@@ -23,14 +23,14 @@ import { SignupService } from '../../services/signup.service';
 export class SignupComponent implements OnInit {
 
   signupForm: FormGroup = this.fb.group({
-    name:            [,[Validators.required]],
-    lastname:        [,[Validators.required]],
+    name:            [,[Validators.required, Validators.maxLength(100)]],
+    lastname:        [,[Validators.required, Validators.maxLength(100)]],
     email:           [,[Validators.required, Validators.email]],
     password:        [,[Validators.required]],
     confirmPassword: [,[Validators.required]]
   })
 
-  user: User =
+  user =
   {
     name:     '',
     lastname: '',
@@ -40,7 +40,8 @@ export class SignupComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
               private router: Router,
-              private signupService: SignupService) { }
+              private authService: AuthService) {
+  }
 
   ngOnInit() {
   }
@@ -52,8 +53,14 @@ export class SignupComponent implements OnInit {
     this.user.email    = email;
     this.user.password = password;
 
-    this.signupService.signup(this.user)
-    .subscribe(console.log);
+    this.authService.signup(this.user)
+      .subscribe(resp => {
+        if (resp === true) {
+          this.router.navigateByUrl('/login');
+        } else {
+          console.log(resp);
+        }
+      });
     
   }
 

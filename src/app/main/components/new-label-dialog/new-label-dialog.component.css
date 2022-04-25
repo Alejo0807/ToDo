@@ -1,0 +1,66 @@
+
+mat-form-field {
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+::ng-deep.mat-form-field-label {
+    color: black !important;
+}
+
+
+::ng-deep .mat-form-field-appearance-outline.label1 .mat-form-field-outline  {
+    background-color: cadetblue !important;
+}
+
+::ng-deep.mat-form-field-appearance-fill.label1 .mat-form-field-flex {
+    background-color: #0FF3FC !important;
+    opacity: 0.4;
+}
+
+::ng-deep.mat-form-field.mat-focused.label1 .mat-form-field-ripple{
+    background-color: #0FF3FC;
+}
+
+::ng-deep.label1 input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px #0FF3FC inset;
+}
+
+::ng-deep.mat-form-field-appearance-fill.label2 .mat-form-field-flex {
+    background-color: #A3D90D !important;
+    opacity: 0.4;
+}
+
+::ng-deep.mat-form-field.mat-focused.label2 .mat-form-field-ripple{
+    background-color: #A3D90D;
+}
+
+::ng-deep.label2 input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px #A3D90D inset;
+}
+
+::ng-deep.mat-form-field-appearance-fill.label3 .mat-form-field-flex {
+    background-color: #B10DD9 !important;
+    opacity: 0.4;
+}
+
+::ng-deep.mat-form-field.mat-focused.label3 .mat-form-field-ripple{
+    background-color: #B10DD9;
+}
+
+::ng-deep.label3 input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px #B10DD9 inset;
+}
+
+::ng-deep.mat-form-field-appearance-fill.label4 .mat-form-field-flex {
+    background-color: #F07A1A !important;
+    opacity: 0.4;
+}
+
+::ng-deep.mat-form-field.mat-focused.label4 .mat-form-field-ripple{
+    background-color: #F07A1A;
+}
+::ng-deep.label4 input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px #F07A1A inset;
+}
+

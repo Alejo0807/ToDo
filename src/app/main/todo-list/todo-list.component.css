@@ -1,0 +1,139 @@
+
+.container {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+}
+.item {
+    align-self: center;
+}
+
+.right {
+    margin-left: auto;
+}
+.test {
+    background-color: #F3F3F3;
+}
+.labels {
+    cursor:pointer;
+    padding: 10px;
+}
+
+.container-button {
+    display: flex;
+    flex: row;
+    align-items: center;
+    cursor:pointer;
+    padding: 10px;
+}
+
+.container-button mat-icon {
+    margin-right: 5px;
+}
+
+.logout {
+    margin-left: 20px;
+    margin-right: 10px;
+}
+
+.labels-add-task {
+    display: flex;
+    flex-direction: row;
+    margin: 0px 70px 40px 50px;
+}
+
+.section {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    cursor:pointer;
+    padding: 10px;
+}
+
+.section h1 {
+    width: fit-content;
+    height: fit-content;
+    font: 400 24px/32px Roboto, "Helvetica Neue", sans-serif;
+    margin: 0 0 0px;
+}
+
+.labels-status {
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+}
+
+.labels-status .labels {
+    display: flex;
+    flex-direction: row;
+}
+
+.labels-status .status {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0px 10px 0px 10px;
+    margin-top: 10px;
+}
+
+.add-task {
+    margin-left: auto;
+    margin-right: 10px;
+    align-self: center;
+}
+
+.add-task button{
+    padding: 10px 5px 10px 5px;
+    border-radius: 12px;
+}
+#to-do {
+    border: 1px solid #D9840D;
+    background-color: #D9840D;
+    margin-right: 20px;
+    width: 120px;
+}
+
+#in-progress {
+    border: 1px solid #F0E31A;
+    background-color: #F0E31A;
+    margin-right: 20px;
+    width: 120px;
+}
+
+
+#done {
+    border: 1px solid #12EC28;
+    background-color: #12EC28;
+    width: 120px;
+}
+
+.status #label1 {
+    border: 1px solid #0FF3FC;
+    background-color: #0FF3FC;
+}
+
+.status #label2 {
+    border: 1px solid #A3D90D;
+    background-color: #A3D90D;
+}
+
+.status #label3 {
+    border: 1px solid #F07A1A;
+    background-color: #F07A1A;
+}
+
+.status #label4 {
+    border: 1px solid #B10DD9;
+    background-color: #B10DD9;
+}
+
+mat-toolbar {
+    background-color: #FFFFFFFF;
+}
+
+::ng-deep button.mat-menu-item {
+    width: auto !important;
+    display: inline;
+}
+
+

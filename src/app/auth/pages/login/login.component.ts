@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -33,9 +35,28 @@ export class LoginComponent implements OnInit {
     rememberme:    ['', []]
   });
 
-  constructor(private fb: FormBuilder) { }
+  invalidAuth = false;
 
+  constructor(private fb: FormBuilder,
+              private authService: AuthService,
+              private router: Router) { }
+    
   ngOnInit(): void {
   }
+
+  login() {
+    const {email, password} = this.loginForm.value;
+    
+    this.authService.login(email, password)
+      .subscribe( ok => {
+        if (ok === true) {
+          this.router.navigateByUrl('/main')
+        } else {
+          this.loginForm.get('password')?.reset();
+        }
+      });
+  }
+
+
 
 }

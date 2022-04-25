@@ -1,0 +1,70 @@
+
+mat-form-field, mat-slider {
+    width: 100%;
+}
+
+.title {
+
+}
+
+.description {
+
+}
+
+.datepicker {
+    
+}
+
+.dificulty {
+    margin-top: 5px;
+}
+
+mat-slider {
+    margin-top: 15px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+.labels {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+mat-checkbox {
+    justify-content: center;
+    margin-left: 5px;
+}
+
+section {
+}
+
+#label1 {
+    background-color: #0FF3FC;
+    width: 50%;
+}
+
+#label2 {
+    background-color: #A3D90D;
+    width: 50%;
+}
+
+#label3 {
+    background-color: #F07A1A;
+    width: 50%;
+}
+
+#label4 {
+    background-color: #B10DD9;
+    width: 50%;
+}
+
+::ng-deep.trend-dialog.mat-dialog-container {
+    overflow-y: hidden !important;
+}
+
+
+
