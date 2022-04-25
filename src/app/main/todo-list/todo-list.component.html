@@ -31,21 +31,35 @@
                         <button mat-button (click)="deleteSection(section.sectionId!)"><mat-icon>delete</mat-icon></button>
                     </div>
                     <button mat-menu-item 
-                            (click)="addSection()">+ Add New Section</button>
+                            (click)="addSection(false)">+ Add New Section</button>
                 </mat-menu>
             </div>
 
             <div class="labels-status">
                 <div class="labels">
-                    <button id="done" mat-raised-button color="warn">DONE</button>
-                    <button id="in-progress" mat-raised-button color="warn">IN PROGRESS</button>
-                    <button id="to-do" mat-raised-button color="warn">TO DO</button>
+                    <button id="to-do" mat-raised-button color="warn"
+                    (click)="filterByStateToDo(isStateFiltered[0])"
+                    [ngStyle]="{ 'background-color': statesTransparent[0] }">TO DO</button>
+                    <button id="in-progress" mat-raised-button color="warn"
+                    (click)="filterByStateInProgress(isStateFiltered[1])"
+                    [ngStyle]="{ 'background-color': statesTransparent[1] }">IN PROGRESS</button>
+                    <button id="done" mat-raised-button color="warn"
+                            (click)="filterByStateDone(isStateFiltered[2])"
+                            [ngStyle]="{ 'background-color': statesTransparent[2] }">DONE</button>
                 </div>
                 <div class="status">
-                    <button id="label1" mat-raised-button color="warn">{{labels[0].labelName}}</button>
-                    <button id="label2" mat-raised-button color="warn">{{labels[1].labelName}}</button>
-                    <button id="label3" mat-raised-button color="warn">{{labels[2].labelName}}</button>
-                    <button id="label4" mat-raised-button color="warn">{{labels[3].labelName}}</button>
+                    <button id="label1" mat-raised-button color="warn" 
+                            (click)="filterByLabel1(isLabelsFiltered[0])"
+                            [ngStyle]="{ 'background-color': labelsTransparent[0] }">{{labels[0].labelName}}</button>
+                    <button id="label2" mat-raised-button color="warn" 
+                            (click)="filterByLabel2(isLabelsFiltered[1])"
+                            [ngStyle]="{ 'background-color': labelsTransparent[1] }">{{labels[1].labelName}}</button>
+                    <button id="label3" mat-raised-button color="warn" 
+                            (click)="filterByLabel3(isLabelsFiltered[2])"
+                            [ngStyle]="{ 'background-color': labelsTransparent[2] }">{{labels[2].labelName}}</button>
+                    <button id="label4" mat-raised-button color="warn" 
+                            (click)="filterByLabel4(isLabelsFiltered[3])"
+                            [ngStyle]="{ 'background-color': labelsTransparent[3] }">{{labels[3].labelName}}</button>
                 </div>
             </div>
 
@@ -55,7 +69,7 @@
                 
         </div>
     
-        <div *ngFor="let task of tasks">
+        <div *ngFor="let task of flteredTask">
             <app-task [task]="task" 
                     (editTaskEvent)="editTask($event)"
                     (deleteTaskEvent)="deleteTask($event)"

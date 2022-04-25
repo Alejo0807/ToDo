@@ -20,6 +20,6 @@ export class LabelsService {
   
   updateLabels(labels: Label[]): Observable<Label[]> {
     const body = [labels[0],labels[1],labels[2],labels[3]];
-    return this.http.put<Label[]>(`${this.baseUrl}/labels`, body);
+    return this.http.post<Label[]>(`${this.baseUrl}/labels`, body);
   }
 }

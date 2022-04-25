@@ -86,10 +86,9 @@
     padding: 10px 5px 10px 5px;
     border-radius: 12px;
 }
-
-#done {
-    border: 1px solid #12EC28;
-    background-color: #12EC28;
+#to-do {
+    border: 1px solid #D9840D;
+    background-color: #D9840D;
     margin-right: 20px;
     width: 120px;
 }
@@ -101,9 +100,10 @@
     width: 120px;
 }
 
-#to-do {
-    border: 1px solid #D9840D;
-    background-color: #D9840D;
+
+#done {
+    border: 1px solid #12EC28;
+    background-color: #12EC28;
     width: 120px;
 }
 

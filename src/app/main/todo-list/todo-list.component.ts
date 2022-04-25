@@ -31,8 +31,9 @@ export class TodoListComponent implements OnInit {
   labels: Label[] = [{id: {}},{id: {}},{id: {}},{id: {}}];
 
   tasks: Task[] = [];
+  flteredTask: Task[] = [];
 
-  sections: Section[] = [{name: 'Loading'}];
+  sections: Section[] = [{name: 'New Section'}];
   currentSection: Section = {name: ''};
   currentSectionIndex: number = 0;
 
@@ -51,8 +52,8 @@ export class TodoListComponent implements OnInit {
       .subscribe(resp => {
         if(resp) {
           this.user = resp;
-          this.getLabels();
           this.getSections();
+          this.getLabels();
         }
       });
   }
@@ -60,12 +61,19 @@ export class TodoListComponent implements OnInit {
   getLabels() {
     this.labelService.getLabelsByUserId(this.user.userId!)
       .subscribe(resp => {
-        if (resp) {
+        if (resp.length > 0) {
           resp.map((label, index) => {
             this.labels[index].id.labelId = label.id.labelId!;
             this.labels[index].id.userId = label.id.userId!;
             this.labels[index].labelName = label.labelName!;
           })
+        } else {
+          for (let i = 0; i < 4; i++) {
+            this.labels[i].id.labelId = i+1;
+            this.labels[i].id.userId = this.user.userId;
+            this.labels[i].labelName = ''
+          }
+          this.openLabelsDialog();
         }
       })
   }
@@ -73,9 +81,13 @@ export class TodoListComponent implements OnInit {
   getSections() {
     this.sectionService.getSectionsByUserId(this.user.userId!)
       .subscribe(res => {
-        this.sections = res;
-        this.currentSection = this.sections[0];
-        this.getTasksBySectionId(this.currentSection.sectionId!);
+        if (res.length > 0) {
+          this.sections = res;
+          this.currentSection = this.sections[0];
+          this.getTasksBySectionId(this.currentSection.sectionId!);
+        } else {
+          this.addSection(true);
+        }
       });
   }
 
@@ -83,6 +95,7 @@ export class TodoListComponent implements OnInit {
     this.taskSerivce.getTasksBySectionId(sectionId)
       .subscribe( res => {
         this.tasks = res;
+        this.flteredTask = res;
       })
   }
 
@@ -112,6 +125,7 @@ export class TodoListComponent implements OnInit {
     });
 
     newTaskDialog.afterClosed().subscribe((result:Task) => {
+      console.log(result)
       if (result) {
         this.taskSerivce.saveTaskBySectionId(this.currentSection.sectionId!, result)
           .subscribe(res => {
@@ -153,7 +167,7 @@ export class TodoListComponent implements OnInit {
           .subscribe()
   }
 
-  addSection() {
+  addSection(isFirstSection: boolean) {
     const newSectionDialog = this.dialog.open(NewSectionDialogComponent, {
       width: '350px'
     });
@@ -161,7 +175,8 @@ export class TodoListComponent implements OnInit {
       if (result) {
         this.sectionService.saveSection(this.user.userId!, result)
           .subscribe(res => {
-            this.sections.push(res);
+            if(isFirstSection) this.sections[0] = res;
+            else this.sections.push(res);
           })
       }
     });
@@ -194,6 +209,75 @@ export class TodoListComponent implements OnInit {
       }
     })
   }
+
+  isLabelsFiltered: boolean[] = [false,false,false,false];
+  labelsTransparent: string[] = ['transparent','transparent','transparent','transparent'];
+  labelsColors: string[] = ['#0FF3FC','#A3D90D','#F07A1A','#B10DD9'];
+
+  filterByLabel(labelIndex: number, isFiltered: boolean) {
+    this.isLabelsFiltered = [false,false,false,false];
+    this.labelsTransparent = ['transparent','transparent','transparent','transparent'];
+    this.isStateFiltered = [false,false,false];
+    this.statesTransparent = ['transparent','transparent','transparent'];
+    if (!isFiltered) {
+      this.flteredTask = this.tasks.filter(task => 
+        task.labels[labelIndex].match('1')
+      )
+      this.isLabelsFiltered[labelIndex] = true
+      this.labelsTransparent[labelIndex] = this.labelsColors[labelIndex];
+    } else {
+      this.flteredTask = this.tasks;
+    }
+  }
+
+  filterByLabel1(isFiltered: boolean) {
+    this.filterByLabel(0, isFiltered);
+  }
+  
+  filterByLabel2(isFiltered: boolean) {
+    this.filterByLabel(1, isFiltered);
+  }
+  
+  filterByLabel3(isFiltered: boolean) {
+    this.filterByLabel(2, isFiltered);
+  }
+  
+  filterByLabel4(isFiltered: boolean) {
+    this.filterByLabel(3, isFiltered);
+  }
+
+  isStateFiltered: boolean[] = [false,false,false,false];
+  statesTransparent: string[] = ['transparent','transparent','transparent'];
+  statesColors: string[] = ['#D9840D','#F0E31A','#12EC28'];
+  
+  filterByState(stateIndex: number, state: string, isFiltered: boolean) {
+    this.isStateFiltered = [false,false,false];
+    this.statesTransparent = ['transparent','transparent','transparent'];
+    this.isLabelsFiltered = [false,false,false,false];
+    this.labelsTransparent = ['transparent','transparent','transparent','transparent'];
+    if (!isFiltered) {
+      this.flteredTask = this.tasks.filter(task => 
+        task.state.match(state)
+      )
+      this.isStateFiltered[stateIndex] = true
+      this.statesTransparent[stateIndex] = this.statesColors[stateIndex];
+    } else {
+      this.flteredTask = this.tasks;
+    }
+  }
+
+  filterByStateToDo(isFiltered: boolean) {
+    this.filterByState(0,'To-Do', isFiltered);
+  }
+  
+  filterByStateInProgress(isFiltered: boolean) {
+    this.filterByState(1,'In-Progress', isFiltered);
+  }
+  
+  filterByStateDone(isFiltered: boolean) {
+    this.filterByState(2,'Done', isFiltered);
+  }
+  
 
   logout() {
     this.authService.logout();

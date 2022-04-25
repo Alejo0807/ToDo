@@ -58,7 +58,7 @@ export class SignupComponent implements OnInit {
         if (resp === true) {
           this.router.navigateByUrl('/login');
         } else {
-          console.log('Error............')
+          console.log(resp);
         }
       });
     

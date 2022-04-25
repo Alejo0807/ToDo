@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  baseUrl: 'https://to-do-anm.rj.r.appspot.com'
 };
