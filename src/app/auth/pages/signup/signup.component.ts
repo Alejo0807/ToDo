@@ -17,17 +17,27 @@ import { AuthService } from '../../services/auth.service';
     .login-field-form {
       padding: 0px 50px 0px 50px;
     }
+    #loading{
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      z-index: 1;
+      margin-left: -50px;
+      margin-top: -50px;
+    }
     `
   ]
 })
 export class SignupComponent implements OnInit {
 
+  showLoader = false;
+
   signupForm: FormGroup = this.fb.group({
-    name:            [,[Validators.required, Validators.maxLength(100)]],
-    lastname:        [,[Validators.required, Validators.maxLength(100)]],
-    email:           [,[Validators.required, Validators.email]],
-    password:        [,[Validators.required]],
-    confirmPassword: [,[Validators.required]]
+    name:            [{value: '', disabled: this.showLoader},[Validators.required, Validators.maxLength(100)],],
+    lastname:        [{value: '', disabled: this.showLoader},[Validators.required, Validators.maxLength(100)],],
+    email:           [{value: '', disabled: this.showLoader},[Validators.required, Validators.email]],
+    password:        [{value: '', disabled: this.showLoader},[Validators.required]],
+    confirmPassword: [{value: '', disabled: this.showLoader},[Validators.required]]
   })
 
   user =
@@ -53,11 +63,14 @@ export class SignupComponent implements OnInit {
     this.user.email    = email;
     this.user.password = password;
 
+    this.showLoader = true
+
     this.authService.signup(this.user)
       .subscribe(resp => {
         if (resp === true) {
           this.router.navigateByUrl('/login');
         } else {
+          this.showLoader = false;
           console.log(resp);
         }
       });
