@@ -26,6 +26,8 @@ interface localLabel {
 })
 export class TodoListComponent implements OnInit {
 
+  showLoader = false;
+
   user: User  = {email: ''};
 
   labels: Label[] = [{id: {}},{id: {}},{id: {}},{id: {}}];
@@ -48,9 +50,11 @@ export class TodoListComponent implements OnInit {
               private sectionService: SectionService) { }
 
   ngOnInit(): void {
+    this.showLoader = true
     this.userService.getUserByToken()
       .subscribe(resp => {
         if(resp) {
+          this.showLoader = false
           this.user = resp;
           this.getSections();
           this.getLabels();
@@ -107,9 +111,13 @@ export class TodoListComponent implements OnInit {
 
     labelsNames.afterClosed().subscribe(result => {
       if (result.labels != this.labels && result.hasChanged) {
+        this.showLoader = true;
         this.labelService.updateLabels(result.labels)
           .subscribe(res => {
-            this.labels = res;
+            if (res) {
+              this.showLoader = false;
+              this.labels = res;
+            }
           });
       }
     });
@@ -125,10 +133,11 @@ export class TodoListComponent implements OnInit {
     });
 
     newTaskDialog.afterClosed().subscribe((result:Task) => {
-      console.log(result)
       if (result) {
+        this.showLoader = true;
         this.taskSerivce.saveTaskBySectionId(this.currentSection.sectionId!, result)
           .subscribe(res => {
+            this.showLoader = false;
             if (!edit) {
               this.tasks.push(res);
             } else {
@@ -152,8 +161,10 @@ export class TodoListComponent implements OnInit {
 
     confirmDialog.afterClosed().subscribe(result => {
       if (result) {
+        this.showLoader = true;
         this.taskSerivce.deleteTask(task.taskId!)
           .subscribe( res => {
+            this.showLoader = false;
             if (res.ok) {
               this.tasks.splice(this.tasks.indexOf(task!),1);
             }
@@ -282,6 +293,7 @@ export class TodoListComponent implements OnInit {
   logout() {
     this.authService.logout();
     this.router.navigateByUrl('login')
+    this.showLoader = true;
   }
 
 }

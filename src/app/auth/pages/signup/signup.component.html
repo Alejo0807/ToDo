@@ -1,11 +1,14 @@
 <form [formGroup]="signupForm" >
+    
+    <div *ngIf="showLoader">
+        <mat-spinner id="loading"></mat-spinner>
+    </div>
 
     <div class="welcome" style="justify-content: center;">
         <h1>¡ Regístrate !</h1>
     </div>
 
     <div fxLayout="column" fxLayoutGap="15px" fxLayout.md="column" fxLayout.sm="column" fxLayout.xs="column" style="margin: 30px;">
-    
 
         <div fxLayout="row" 
             fxLayout.sm="column"
@@ -55,13 +58,14 @@
             style="padding: 30px;">    
     
             <button mat-raised-button 
-                    fxFlex="100" 
-                    style="background-color: #E6005F; color: white; height: 50px;"
-                    (click)="signup()">
+                    color="warn"
+                    fxFlex="100"
+                    (click)="signup()"
+                    [disabled]="!signupForm.valid">
                 Sign up
             </button>
 
-            <button mat-raised-button fxFlex="100" style="background-color: #0F6EFC; color: white;">
+            <button mat-raised-button fxFlex="100" style="background-color: #0F6EFC; color: white; height: 50px;">
                 Sign up with Google
             </button>
 
