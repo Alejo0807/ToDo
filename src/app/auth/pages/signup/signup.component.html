@@ -1,6 +1,6 @@
 <form [formGroup]="signupForm" >
     
-    <div class="spinner-border" role="status" *ngIf="showLoader">
+    <div *ngIf="showLoader">
         <mat-spinner id="loading"></mat-spinner>
     </div>
 
@@ -9,8 +9,6 @@
     </div>
 
     <div fxLayout="column" fxLayoutGap="15px" fxLayout.md="column" fxLayout.sm="column" fxLayout.xs="column" style="margin: 30px;">
-
-    
 
         <div fxLayout="row" 
             fxLayout.sm="column"

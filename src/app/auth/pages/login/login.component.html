@@ -1,5 +1,9 @@
 <form [formGroup]="loginForm" >
 
+    <div *ngIf="showLoader">
+        <mat-spinner id="loading"></mat-spinner>
+    </div>
+
     <div class="welcome" style="justify-content: center;">
         <h1>¡ Bienvenido !</h1>
     </div>

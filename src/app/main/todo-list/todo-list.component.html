@@ -1,4 +1,8 @@
 <div class="test">
+    <div *ngIf="showLoader">
+        <mat-spinner id="loading"></mat-spinner>
+    </div>
+
     <mat-toolbar class="container">
         <div class="item">
             <span>{{user.email}}</span>
