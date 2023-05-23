@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Section } from '../../interfaces/interfaces';
@@ -13,7 +13,7 @@ export class NewSectionDialogComponent implements OnInit {
   section: Section = {name: ''};
 
   newSectionForm = this.fb.group({
-    sectionName: ['', [Validators.required]]
+    sectionName: ['', [Validators.required, Validators.maxLength(10)]]
   });
 
   constructor(private newSectionDialog: MatDialogRef<NewSectionDialogComponent>,

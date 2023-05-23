@@ -6,7 +6,8 @@
             <mat-label>Section</mat-label>
             <input matInput 
                     placeholder="New Section"
-                    formControlName="sectionName">
+                    formControlName="sectionName"
+                    (keydown.space)="$event.preventDefault();">
             <mat-error *ngIf="newSectionForm.invalid && (newSectionForm.dirty || newSectionForm.touched)">
                 This field is required
             </mat-error>

@@ -186,8 +186,12 @@ export class TodoListComponent implements OnInit {
       if (result) {
         this.sectionService.saveSection(this.user.userId!, result)
           .subscribe(res => {
-            if(isFirstSection) this.sections[0] = res;
-            else this.sections.push(res);
+            if(isFirstSection) {
+              this.sections[0] = res;
+              this.currentSection = res; 
+            } else {
+              this.sections.push(res);
+            }
           })
       }
     });
@@ -288,7 +292,6 @@ export class TodoListComponent implements OnInit {
   filterByStateDone(isFiltered: boolean) {
     this.filterByState(2,'Done', isFiltered);
   }
-  
 
   logout() {
     this.authService.logout();
