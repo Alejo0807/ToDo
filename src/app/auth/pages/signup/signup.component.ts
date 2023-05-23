@@ -38,7 +38,7 @@ export class SignupComponent implements OnInit {
     email:           [{value: '', disabled: this.showLoader},[Validators.required, Validators.email]],
     password:        [{value: '', disabled: this.showLoader},[Validators.required]],
     confirmPassword: [{value: '', disabled: this.showLoader},[Validators.required]]
-  })
+  }, {validator: this.passwordMatch.bind(this) })
 
   user =
   {
@@ -75,6 +75,15 @@ export class SignupComponent implements OnInit {
         }
       });
     
+  }
+
+
+  passwordMatch(formGroup: FormGroup) {
+    const { value: password } = formGroup.get('password')!;
+    const { value: confirmPassword } = formGroup.get('confirmPassword')!;
+    console.log( password)
+    console.log( confirmPassword)
+    return password === confirmPassword ? null : { passwordNotMatch: true };
   }
 
 }
