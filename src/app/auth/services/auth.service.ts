@@ -73,4 +73,23 @@ export class AuthService {
     localStorage.removeItem('token')
   }
 
+  forgotPassword(email: string): Observable<Response> {
+    const url = `${this.baseUrl}/auth/forgot-password`;
+    const body = email;
+
+    return this.http.post<Response>(url, body);
+  }
+
+  forgotPasswordValidateToken(token: string): Observable<Response> {
+    const url = `${this.baseUrl}/auth/forgot-password?token=${ token }`;
+    
+    return this.http.get<Response>(url);
+  }
+
+  resetPassword(token: string, password: string): Observable<Response> {
+    const url = `${this.baseUrl}/auth/reset-password?token=${ token }`;
+    const body = {password};
+
+    return this.http.post<Response>(url, body);
+  }
 }
