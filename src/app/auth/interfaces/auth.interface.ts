@@ -4,3 +4,8 @@ export interface AuthResponse {
     token?: string
     authorities? : string[]
 }
+
+export interface Message {
+    ok     : boolean,
+    message: string
+}
