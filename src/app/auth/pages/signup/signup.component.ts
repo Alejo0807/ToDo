@@ -77,12 +77,9 @@ export class SignupComponent implements OnInit {
     
   }
 
-
   passwordMatch(formGroup: FormGroup) {
     const { value: password } = formGroup.get('password')!;
     const { value: confirmPassword } = formGroup.get('confirmPassword')!;
-    console.log( password)
-    console.log( confirmPassword)
     return password === confirmPassword ? null : { passwordNotMatch: true };
   }
 
