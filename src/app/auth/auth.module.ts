@@ -8,13 +8,17 @@ import { MainComponent } from './pages/main/main.component';
 import { SignupComponent } from './pages/signup/signup.component';
 import { MaterialModule } from '../material/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 
 
 @NgModule({
   declarations: [
     LoginComponent,
     MainComponent,
-    SignupComponent
+    SignupComponent,
+    ForgotPasswordComponent,
+    ResetPasswordComponent
   ],
   imports: [
     AuthRoutingModule,
